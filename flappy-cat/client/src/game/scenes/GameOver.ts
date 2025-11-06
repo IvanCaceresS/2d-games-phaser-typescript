@@ -9,6 +9,7 @@ export class GameOver extends Scene {
     private noButton!: Phaser.GameObjects.Text;
     private nameInput!: Phaser.GameObjects.DOMElement;
     private saveButton!: Phaser.GameObjects.Text;
+    private scoreListGroup!: Phaser.GameObjects.Group;
     private errorText!: Phaser.GameObjects.Text;
 
     constructor() {
@@ -39,6 +40,7 @@ export class GameOver extends Scene {
         }).setOrigin(0.5);
 
         // CARGA DE PUNTUACIONES DESDE EL BACKEND
+        this.scoreListGroup = this.add.group();
         this.fetchHighScores();
 
         // CARGA DEL FORMULARIO DE GUARDADO
@@ -181,23 +183,29 @@ export class GameOver extends Scene {
 
     // INICIO FUNCIÓN DIBUJAR PUNTUACIONES EN PANTALLA ---
     drawHighScores() {
+        this.scoreListGroup.clear(true, true);
+
         const { width, height } = this.cameras.main;
 
-        this.add.text(width / 2, height / 2 - 100, 'Mejores Puntuaciones', {
+        const title = this.add.text(width / 2, height / 2 - 100, 'Mejores Puntuaciones', {
             fontFamily: 'Arial', fontSize: 28, color: '#FFD700',
-            stroke: '#000000',
-            strokeThickness: 4
+            stroke: '#000000', strokeThickness: 4
         }).setOrigin(0.5);
+
+        this.scoreListGroup.add(title);
 
         let yPos = height / 2 - 60;
         this.highScores.forEach((entry, index) => {
-            this.add.text(width / 2 - 100, yPos, `${index + 1}. ${entry.name}`, {
+            const nameText = this.add.text(width / 2 - 100, yPos, `${index + 1}. ${entry.name}`, {
                 fontSize: 20, color: '#333333'
             }).setOrigin(0, 0.5);
 
-            this.add.text(width / 2 + 100, yPos, entry.score.toString(), {
+            const scoreText = this.add.text(width / 2 + 100, yPos, entry.score.toString(), {
                 fontSize: 20, color: '#333333'
             }).setOrigin(1, 0.5);
+
+            this.scoreListGroup.add(nameText);
+            this.scoreListGroup.add(scoreText);
 
             yPos += 30;
         });
