@@ -137,8 +137,8 @@ export class Game extends Scene {
         const spawnX = this.cameras.main.width + 100;
 
         // --- INICIO LOGICA DE DIFICULTAD
-        const baseGap = 200;
-        const minGap = 40;
+        const baseGap = 180;
+        const minGap = 60; // ALCANZA EL MINIMO A LOS 150 PUNTOS
         const reductionPerTenPoints = 8;
         const difficultyChunks = Math.floor(this.score / 10);
         const calculatedGap = baseGap - (difficultyChunks * reductionPerTenPoints);
