@@ -39,9 +39,9 @@ npm install
 
 # Rutas y puertos
 
-🚀 Juego (Phaser): http://localhost:8081
+🚀 Juego (Phaser): http://159.112.129.245:8081
 
-🚀 Backend (NestJS): http://localhost:3000
+🚀 Backend (NestJS): http://159.112.129.245:3000
 
 # DOCKER-COMPOSE COMANDOS UTILES
 1. Este comando detiene y elimina todo lo asociado con tu docker-compose.yml
