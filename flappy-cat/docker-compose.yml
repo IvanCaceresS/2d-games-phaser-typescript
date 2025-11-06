@@ -1,0 +1,28 @@
+services:
+  # El Backend de Nest.js
+  server:
+    build:
+      context: ./server
+    container_name: flappy_cat_server
+    ports:
+      - "3000:3000"
+    volumes:
+      # Monta el código fuente de Nest para hot-reload
+      - ./server/src:/usr/src/app/src
+      - ./server/db:/usr/src/app/db
+    command: npm run start:dev
+
+  # El Frontend de Phaser
+  client:
+    build:
+      context: ./client
+    container_name: flappy_cat_client
+    ports:
+      - "8081:80" # Juegamos en el puerto 8081
+    volumes:
+      # Monta el código fuente de Phaser para hot-reload
+      - ./client/src:/app/src
+      # Monta los assets estáticos (imágenes, etc.) para hot-reload
+      - ./client/public:/app/public
+    depends_on:
+      - server
