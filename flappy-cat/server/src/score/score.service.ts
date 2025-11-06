@@ -13,9 +13,10 @@ export class ScoreService {
   // INICIO LÓGICA PARA CREAR O ACTUALIZAR PUNTUACIÓN ---
   async create(createScoreDto: CreateScoreDto): Promise<Score> {
     const { name, score } = createScoreDto;
+    const normalizedName = name.toUpperCase();
 
     const existingScore = await this.scoreRepository.findOne({
-      where: { name: name },
+      where: { name: normalizedName },
     });
 
     if (existingScore) {
@@ -27,7 +28,10 @@ export class ScoreService {
         return existingScore;
       }
     } else {
-      const newScore = this.scoreRepository.create(createScoreDto);
+      const newScore = this.scoreRepository.create({
+        name: normalizedName, // <-- CAMBIADO
+        score: score,
+      });
       return this.scoreRepository.save(newScore);
     }
   }
