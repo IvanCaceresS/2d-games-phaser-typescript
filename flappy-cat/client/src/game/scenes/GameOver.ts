@@ -165,7 +165,7 @@ export class GameOver extends Scene {
     // INICIO FUNCIÓN CARGAR PUNTUACIONES DESDE EL BACKEND ---
     async fetchHighScores() {
         try {
-            const response = await fetch('http://159.112.129.245:3001/score');
+            const response = await fetch('http://159.112.129.245:3000/score');
             if (!response.ok) throw new Error('No se pudieron cargar las puntuaciones');
             
             this.highScores = await response.json() as { name: string, score: number }[];
