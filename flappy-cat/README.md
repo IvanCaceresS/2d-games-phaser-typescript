@@ -41,7 +41,7 @@ npm install
 
 🚀 Juego (Phaser): http://159.112.129.245:8081
 
-🚀 Backend (NestJS): http://159.112.129.245:3000
+🚀 Backend (NestJS): http://159.112.129.245:3001
 
 # DOCKER-COMPOSE COMANDOS UTILES
 1. Este comando detiene y elimina todo lo asociado con tu docker-compose.yml

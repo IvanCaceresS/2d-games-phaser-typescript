@@ -5,7 +5,7 @@ services:
       context: ./server
     container_name: flappy_cat_server
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       # Monta el código fuente de Nest para hot-reload
       - ./server/src:/usr/src/app/src

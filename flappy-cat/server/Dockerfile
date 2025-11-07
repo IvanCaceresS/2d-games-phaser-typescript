@@ -11,5 +11,5 @@ COPY --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/package*.json ./
 COPY --from=build /usr/src/app/nest-cli.json ./
 COPY --from=build /usr/src/app/tsconfig*.json ./
-EXPOSE 3000
+EXPOSE 3001
 CMD ["node", "dist/main"]
