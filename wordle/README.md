@@ -58,9 +58,53 @@
 
         docker system prune
 
-### INICIAR PROYECTO
-
-    npx degit https://github.com/phaserjs/template-vite-ts.git .
-    npm install
 
 ### PLAN PASO A PASO
+
+#### FASE 0: TEMPLATE PROYECTO PHASER 3.X CLIENTE-SERVIDOR
+
+1. Crear dos carpetas /client y /server.
+2. Crear un docker-compose.yml en la raiz
+3. Dentro de /client ejecutar ``` npx degit https://github.com/phaserjs/template-vite-ts.git . ``` y luego ```npm install```
+
+### FASE 1: SERVIDOR NEST.JS Y SQLITE
+
+1. Iniciar un nuevo proyecto de nest.js en la carpeta /server ``` npx @nestjs/cli new . ```
+2. Instalar SQLITE ``` npm install @nestjs/typeorm typeorm sqlite3 ```
+3. Configurar src/app.module.ts para que utilice como base de datos sqlite
+4. Crear un módulo, servicio y entidad 'word'
+
+        nest g module word
+        nest g service word
+
+5. Crear un archivo src/word/word.entity.ts e importarla en src/word/word.module.ts
+6. Crea una carpeta src/seed, donde dentro habrá:
+
+        - palabras_5.txt
+        - palabras_7.txt
+        - palabras_9.txt
+7. Permitir que src/word/word.service.ts lea estos archivos .txt
+8. Generar los archivos
+
+        nest g module game
+        nest g service game
+        nest g controller game
+9. Crear un DTO (Data Transfer Object) para definir como se verán los datos que envía el front
+
+        src/game/dto/check-word.dto.ts
+
+10. Implementar la lógica en src/game/game.service.ts
+11. Crear el endpoint en src/game/game.controller.ts
+
+### FASE 2: CLIENTE PHASER 3.X + VITE
+
+1. Instalar las librerías de cookies 
+
+        npm install js-cookie
+        npm install @types/js-cookie --save-dev
+2. Crear las escenas
+        
+        DifficultyScene.ts -> Para elegir 5, 7 o 9 letras.
+        GameScene.ts -> El tablero principal del juego.
+        UIScene.ts -> El teclado virtual y los mensajes.
+        EndScene.ts -> El final del juego.
